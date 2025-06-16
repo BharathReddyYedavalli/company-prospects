@@ -1,54 +1,40 @@
 import streamlit as st
-import time
+from streamlit_javascript import st_javascript
 
+st.set_page_config(page_title="Company Prospects", layout="centered")
 
-# Custom HTML styling
 st.markdown("""
     <style>
-        .title {
-            font-size: 40px;
-            font-weight: bold;
-            color: #2E86C1;
+        .big-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
         }
-        .subtitle {
-            font-size: 20px;
-            color: #566573;
-        }
-        .footer {
-            font-size: 12px;
-            color: #A6ACAF;
-            margin-top: 50px;
+        .section {
+            background: #f7f7f7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 8px rgba(0,0,0,0.05);
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Title
-st.markdown('<div class="title">📈 Company Prospects</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">AI-powered stock prediction & sentiment insights</div>', unsafe_allow_html=True)
-st.write("---")
+st.markdown('<div class="big-title">📈 Company Prospects</div>', unsafe_allow_html=True)
 
-ticker = st.text_input("🔍 Enter a stock ticker (e.g., AAPL, TSLA):")
+with st.container():
+    st.markdown('<div class="section">', unsafe_allow_html=True)
 
-placeholder = st.empty()  # reserve a slot for the message
+    st.subheader("🧠 What This App Does")
+    st.write("Predicts stock trends, gathers recent company news, and offers insights on whether to invest.")
 
-if ticker:
-    st.success(f"✅ You entered: {ticker}")
+    st.subheader("🌐 Browser Info (via JavaScript)")
+    browser_info = st_javascript("navigator.userAgent")
+    st.write("Your browser is:", browser_info)
 
-    # Create a placeholder for the loading message
-    loading_message = st.empty()
-    loading_message.info("📰 Pulling data and predictions now...")
+    st.subheader("🚀 Coming Soon")
+    st.info("Predictions and news features will appear here after you connect your backend or data feed!")
 
-    # Wait 2 seconds
-    time.sleep(2)
-
-    # Clear the loading message
-    loading_message.empty()
-
-    # (Optional) Show your actual prediction/data here
-    st.write("✅ Data loaded! (This is where predictions will go.)")
-
-
-# Footer
-st.markdown(
-    '<div class="footer">This app was created for educational and research purposes only. It is not intended to provide financial advice. All data is collected in compliance with public terms of service and used fairly for non-commercial use.</div>',
-    unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
